@@ -6,7 +6,9 @@ import {
   RouterProvider,
 } from "react-router";
 import router from './router/router.jsx';
+import Aos from 'aos';
 
+Aos.init()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
