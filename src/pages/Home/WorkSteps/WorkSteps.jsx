@@ -34,7 +34,7 @@ const WorkSteps = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
         {steps.map((step) => (
-          <div key={step.id} className="bg-white shadow-2xl shadow-amber-200 rounded-xl p-6 text-center hover:shadow-2xl transition hover:bg-gray-300 hover:scale-110 hover:shadow-green-300">
+          <div data-aos="zoom-in-down" key={step.id} className="bg-white shadow-2xl shadow-amber-200 rounded-xl p-6 text-center hover:shadow-2xl transition hover:bg-gray-300 hover:scale-110 hover:shadow-green-300">
             <div className="mb-4 flex justify-center">{step.icon}</div>
             <h3 className="text-xl text-[#03373D] font-semibold mb-2">{step.title}</h3>
             <p className="text-gray-600 text-sm">{step.desc}</p>
