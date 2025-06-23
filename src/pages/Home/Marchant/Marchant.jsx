@@ -3,8 +3,8 @@ import marchantPhoto from '../../../assets/location-merchant.png'
 
 const Marchant = () => {
     return (
-       <div className="hero bg-[#f5f7f8]  p-20">
-  <div className="hero-content flex-col lg:flex-row-reverse bg-[#03373D] p-15 rounded-3xl">
+       <div data-aos="zoom-in-up" className="bg-[url('assets/be-a-merchant-bg.png')] bg-[#03373D] rounded-3xl p-20 bg-no-repeat">
+  <div className="hero-content flex-col lg:flex-row-reverse rounded-3xl">
     <img
       src={marchantPhoto}
       className="max-w-sm rounded-lg  "
