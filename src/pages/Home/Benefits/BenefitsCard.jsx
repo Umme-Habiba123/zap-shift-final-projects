@@ -6,8 +6,8 @@ const BenefitsCard = ({ image, title, description }) => {
       <img src={image} alt={title} className="w-28 h-28 object-contain " />
       <p className="border-r-2 border-dashed border-gray-500 ">p</p>
       <div className="text-center md:text-left ">
-        <h3 className="text-lg font-bold text-gray-800 mb-2">{title}</h3>
-        <p className="text-sm text-gray-600">{description}</p>
+        <h3 className="text-lg font-bold text-[#03373D] mb-2">{title}</h3>
+        <p className="text-sm text-gray-600 ">{description}</p>
       </div>
     </div>
   );

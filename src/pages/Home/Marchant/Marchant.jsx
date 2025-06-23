@@ -3,7 +3,7 @@ import marchantPhoto from '../../../assets/location-merchant.png'
 
 const Marchant = () => {
     return (
-       <div data-aos="zoom-in-up" className="bg-[url('assets/be-a-merchant-bg.png')] bg-[#03373D] rounded-3xl p-20 bg-no-repeat">
+       <div data-aos="zoom-in-up" className="bg-[url('assets/be-a-merchant-bg.png')] bg-[#03373D] rounded-3xl p-20 bg-no-repeat my-5">
   <div className="hero-content flex-col lg:flex-row-reverse rounded-3xl">
     <img
       src={marchantPhoto}
