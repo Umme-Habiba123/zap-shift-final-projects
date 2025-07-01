@@ -1,13 +1,33 @@
 import React from 'react';
 import { NavLink } from 'react-router';
 import ProFastLogo from '../ProfastLogo/ProFastLogo';
+import useAuth from '../../../hooks/useAuth';
 
 const Navbar = () => {
+
+  const {user,logOut}=useAuth()
+
     const navItems=<>
          <li><NavLink to={'/'}>Home</NavLink></li>
          <li><NavLink to={'/about'}>About</NavLink></li>
-           
+         <li><NavLink to={'/coverage'}>Coverage</NavLink></li>         
+         {
+          user && <>
+           <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>    
+          </>
+         }
+         <li><NavLink to={'/sendParcel'}>Send A parcel</NavLink></li>         
+         <li><NavLink to={'/beARider'}>BeARider</NavLink></li>         
     </>
+
+      const handleLogOut=()=>{
+        logOut().then(result=>{
+            console.log(result)
+        }).catch(error=>{
+            console.log(error)
+        })
+    }
+
 
     return (
        <div className="navbar py-5 bg-gray-900 shadow-sm">
@@ -19,14 +39,7 @@ const Navbar = () => {
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li><a>Item 1</a></li>
-        <li>
-          <a>Parent</a>
-          <ul className="p-2">
-           {navItems}
-          </ul>
-        </li>
-        <li><a>Item 3</a></li>
+       {navItems}
       </ul>
     </div>
     <a className="btn btn-ghost text-xl"><ProFastLogo></ProFastLogo></a>
@@ -35,10 +48,19 @@ const Navbar = () => {
     <ul className="menu menu-horizontal px-1">
       {navItems}
     </ul>
+
   </div>
-  <div className="navbar-end">
-    <a className="btn">Button</a>
+
+  {
+    user?  <NavLink><button onClick={handleLogOut} className="btn">Log Out</button></NavLink> :
+    <>
+     <div className="navbar-end gap-2">
+    <NavLink to={'/login'}> <button className="btn">Login</button></NavLink>
+    <NavLink to={'/register'}> <button className="btn">Register</button></NavLink>
+    
   </div>
+    </>
+  } 
 </div>
     );
 };
