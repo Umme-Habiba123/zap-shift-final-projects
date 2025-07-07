@@ -19,6 +19,14 @@ import BeARider from "../pages/Dashboard/BeARider/BeARider";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import PendingRiders from "../pages/Dashboard/PendingRiders/PendingRiders";
 import ActiveRiders from "../pages/Dashboard/ActiveRiders/ActiveRiders";
+import MakeAdmin from "../pages/Dashboard/MakeAdmin/MakeAdmin";
+import Forbidden from "../pages/Forbidden/Forbidden";
+import AdminRoute from "../routes/AdminRoute";
+import AssignRider from "../pages/AssignRider/AssignRider";
+import RiderRoute from "../routes/RiderRoute";
+import PendingDeliveries from "../pages/Dashboard/PendingDeliveries/pendingDeliveries";
+import CompletedDeliveries from "../pages/Dashboard/CompletedDeliveries/CompletedDeliveries";
+import MyEarnings from "../pages/Dashboard/Myearnings/MyEarnings";
 
 export const router = createBrowserRouter([
   {
@@ -47,7 +55,13 @@ export const router = createBrowserRouter([
         element:<PrivateRoute>
           <BeARider></BeARider>
         </PrivateRoute>
-      }
+      },
+      {
+        path:'forbidden',
+        element:<PrivateRoute>
+          <Forbidden></Forbidden>
+        </PrivateRoute>
+      },
       
     ]
   },
@@ -92,12 +106,56 @@ export const router = createBrowserRouter([
         Component:PendingRiders
       },
       {
+        path:'assignRider',
+        element: 
+          <AssignRider></AssignRider>
+        
+      },
+
+      // rider only routes---
+       {
+        path:'pendingDeliveries',
+        element: 
+        // <RiderRoute>
+          <PendingDeliveries></PendingDeliveries>
+        // </RiderRoute>
+        
+      },
+       {
+        path:'completedDeliveries',
+        element: 
+        // <RiderRoute>
+          <CompletedDeliveries></CompletedDeliveries>
+        // </RiderRoute>
+        
+      },
+       {
+        path:'myEarnings',
+        element: 
+        // <RiderRoute>
+          <MyEarnings></MyEarnings>
+        // </RiderRoute>
+        
+      },
+
+      // admin only routes---
+      {
         path:'pendingRiders',
-        Component:PendingRiders
+        element:
+          <PendingRiders></PendingRiders>
+       
       },
       {
         path:'activeRiders',
-        Component:ActiveRiders
+        element:
+          <ActiveRiders></ActiveRiders>
+      
+      },
+      {
+        path:'makeAdmin',
+        element:
+          <MakeAdmin></MakeAdmin>
+   
       },
      
     ]

@@ -1,16 +1,10 @@
 import React, { } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
-import useAuth from '../../hooks/useAuth'; // adjust path if needed
+import useAuth from '../../hooks/useAuth';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { useLoaderData } from 'react-router';
-
-// constserviceCenter = [
-//   { id: 1, name: 'Uttara Center', district: 'Dhaka', region: 'Dhaka', gajioon: 'Shaheen Vai' },
-//   { id: 2, name: 'Mirpur Hub', district: 'Dhaka', region: 'Dhaka', gajioon: 'Salman Vai' },
-//   { id: 3, name: 'Zindabazar Point', district: 'Sylhet', region: 'Sylhet', gajioon: 'Faruk Vai' },
-//   { id: 4, name: 'Sonadanga Branch', district: 'Khulna', region: 'Khulna', gajioon: 'Rasel Vai' },
-// ];
+import { useLoaderData, useNavigate } from 'react-router';
+import { logTracking } from "../../hooks/useTrackingLogger";
 
 const SendParcelForm = () => {
   const { user } = useAuth();
@@ -24,7 +18,7 @@ const SendParcelForm = () => {
 
   const serviceCenter = useLoaderData()
   const axiosSecure = useAxiosSecure()
-
+  const navigate = useNavigate()
   const parcelType = watch("type");
   const senderCenterWatch = watch("senderCenter");
   const receiverCenterWatch = watch("receiverCenter");
@@ -33,19 +27,6 @@ const SendParcelForm = () => {
     const center = serviceCenter.find(w => w.name === centerName);
     return center ? center.gajioon : '';
   };
-
-  // const getGroupedCenters = () => {
-  //   const grouped = {};
-  //   serviceCenter.forEach(center => {
-  //     if (!grouped[center.district]) {
-  //       grouped[center.district] = [];
-  //     }
-  //     grouped[center.district].push(center.name);
-  //   });
-  //   return grouped;
-  // };
-
-  // const groupedCenters = getGroupedCenters();
 
   const calculateCost = (data) => {
     const type = data.type;
@@ -105,19 +86,37 @@ const SendParcelForm = () => {
 
         axiosSecure.post('/parcels', finalData)
           .then(res => {
-            console.log(res.data)
             if (res.data.insertedId) {
+              // ✅ Log tracking after parcel is submitted
+              logTracking(res.data.insertedId, 'parcel_submitted', 'Parcel submitted by user');
+
               Swal.fire('Success!', 'Parcel Saved & Proceeding to Payment.', 'success');
               reset();
+              navigate('/dashboard/myParcels');
             } else {
               Swal.fire('Edit Mode', 'You can edit your parcel details again.', 'info');
             }
           });
+        // await logTracking(
+        //   {
+        //     // trackingId: "abc123",
+        //     status: "parcel_submitted",
+        //     details: `paid by ${user.displayName}`,
+        //     location: parcel.senderCenter,
+        //     updatedBy: user.email
+        //   }
+
+        // )
+
+        navigate('/dashboard/myParcels')
 
       }
     })
 
   };
+
+
+
 
   return (
     <div className="max-w-6xl mx-auto p-6 bg-base-100 shadow-xl rounded-xl mt-10">

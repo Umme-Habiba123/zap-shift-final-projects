@@ -10,7 +10,6 @@ import { RxCrossCircled } from "react-icons/rx";
 
 const PendingRiders = () => {
     const axiosSecure = useAxiosSecure();
-    // const [pendingRiders, setPendingRiders] = useState([]);
     const [selectedRider, setSelectedRider] = useState(null);
 
     const { isPending, data: riders = [], refetch } = useQuery({
@@ -158,6 +157,9 @@ const PendingRiders = () => {
                     </div>
                 </div>
             )}
+
+
+            
         </div>
     );
 };
